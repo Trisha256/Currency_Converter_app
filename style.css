@@ -1,18 +1,92 @@
+:root{
+	--bg: #f4f7fb;
+	--card: #ffffff;
+	--muted: #6b7280;
+	--accent: #2563eb;
+	--success: #16a34a;
+	--danger: #dc2626;
+	--radius: 12px;
+}
+
+*{box-sizing:border-box}
 body{
-font-family: Arial;
-text-align: center;
-margin-top: 50px;
+	font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	background: linear-gradient(180deg, #f7fbff 0%, var(--bg) 100%);
+	min-height:100vh;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	margin:0;
+	padding:24px;
+	color:#0f172a;
 }
 
-input, select, button{
-padding:10px;
-margin:10px;
-font-size:16px;
+.card{
+	width:100%;
+	max-width:520px;
+	background:var(--card);
+	border-radius:var(--radius);
+	box-shadow: 0 6px 20px rgba(2,6,23,0.08);
+	padding:20px 22px;
 }
 
+.title{
+	margin:0 0 14px 0;
+	font-size:20px;
+	font-weight:600;
+}
+
+.row{ margin-bottom:12px; }
+label{ display:block; font-size:13px; color:var(--muted); margin-bottom:6px; }
+
+input[type="number"], select{
+	width:100%;
+	padding:10px 12px;
+	border-radius:8px;
+	border:1px solid #e6edf3;
+	font-size:15px;
+	outline:none;
+	transition: box-shadow .15s ease, border-color .12s ease;
+}
+
+input[type="number"]:focus, select:focus{ box-shadow:0 4px 18px rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.35); }
+
+.two-cols{ display:flex; gap:12px; }
+.two-cols > div { flex:1 }
+
+.actions{ display:flex; gap:10px; align-items:center; }
 button{
-background-color:#007bff;
-color:white;
-border:none;
-cursor:pointer;
+	padding:10px 14px;
+	border-radius:8px;
+	border:none;
+	cursor:pointer;
+	font-weight:600;
+}
+
+#swapBtn{
+	background:transparent;
+	color:var(--accent);
+	border:1px solid rgba(37,99,235,0.12);
+}
+
+#convertBtn{
+	background:var(--accent);
+	color:white;
+	flex:1;
+}
+
+.status{ color:var(--muted); font-size:13px; min-height:18px; margin-top:6px }
+.status.status-error{ color:var(--danger); }
+
+.result-card{ margin-top:14px; padding:12px; background:#f8fbff; border-radius:8px; border:1px solid #e6f0ff }
+.result-text{ font-size:18px; font-weight:700 }
+.rate-text{ color:var(--muted); font-size:13px; margin-top:6px }
+.date-text{ color:var(--muted); font-size:12px; margin-top:6px }
+
+.history{ margin-top:12px; color:var(--muted); font-size:13px }
+.history ul{ padding-left:18px; margin:6px 0 }
+
+@media (max-width:520px){
+	.two-cols{ flex-direction:column }
+	.card{ padding:16px }
 }
