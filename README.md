@@ -3,7 +3,7 @@
 A simple, beginner-friendly currency converter built with **HTML**, **CSS**, and **JavaScript**. Enter an amount, choose currencies, and convert using live exchange rates.
 
 ## Demo
-- Run locally by opening `index.html` in your browser.
+- https://currency-converter-app-rosy.vercel.app/
 
 ## Features
 - Convert an entered amount between currencies
