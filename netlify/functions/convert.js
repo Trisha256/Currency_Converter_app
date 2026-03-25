@@ -1,5 +1,7 @@
 // netlify/functions/convert.js
-export const handler = async (event, context) => {
+const REQUEST_TIMEOUT_MS = 5000;
+
+exports.handler = async (event, context) => {
   try {
     const params = event.queryStringParameters || {};
     const amount = Number(params.amount);
@@ -23,7 +25,7 @@ export const handler = async (event, context) => {
 
     // --- Call ExchangeRate-API with timeout ---
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 5000); // 5 seconds timeout
+    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
     const providerUrl = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${from}`;
     const resp = await fetch(providerUrl, { signal: controller.signal });
@@ -32,12 +34,12 @@ export const handler = async (event, context) => {
     const data = await resp.json();
 
     if (!resp.ok || !data.conversion_rates) {
-      return { statusCode: 502, body: JSON.stringify({ error: 'Provider request failed', data }) };
+      return { statusCode: 502, body: JSON.stringify({ error: 'Provider request failed' }) };
     }
 
     const rate = data.conversion_rates[to];
     if (typeof rate !== 'number') {
-      return { statusCode: 502, body: JSON.stringify({ error: `Rate not found for ${to}`, data }) };
+      return { statusCode: 502, body: JSON.stringify({ error: `Rate not found for ${to}` }) };
     }
 
     const result = amount * rate;
